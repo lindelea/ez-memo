@@ -1,0 +1,28 @@
+<template>
+  <nav class="scene_nav">
+    <ol class="scene_nav_list">
+      <li class="scene_nav_item" v-for="(params, index) in maxScene">
+        <button class="scene_nav_button" @click="scene = index" :class="{ 'o-active': scene === index }"></button>
+      </li>
+    </ol>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: "SceneNav",
+  data() {
+    return {
+      scene: 0,
+      maxScene: 8
+    }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.scene = this.maxScene - 3
+    }, 1000)
+  }
+}
+</script>
+
+<style src="./SceneNav.scss" lang="scss" scoped />
