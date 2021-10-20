@@ -1,6 +1,7 @@
+$logo-size: 3.6em;
 .logo {
   h1 {
-    font: 3.6em 'Press Start 2P', cursive;
+    font: $logo-size 'Press Start 2P', cursive;
     display: flex;
     align-items: center;
     margin: 0;
