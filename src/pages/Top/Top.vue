@@ -1,24 +1,14 @@
 <template>
   <div class="top">
-      <div class="arwes">
-        <transition name="fade">
-          <div class="sss" v-if="show"></div>
-        </transition>
+      <div class="glow-bg">
+        <div class="glow"></div>
       </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Top",
-  data() {
-    return {
-      show: false
-    }
-  },
-  mounted() {
-    this.show = true;
-  }
+  name: "Top"
 }
 </script>
 
