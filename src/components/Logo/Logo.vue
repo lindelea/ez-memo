@@ -2,7 +2,7 @@
   <div class="logo">
     <h1>
       <span>EZ</span>
-      <div class="memo">
+      <button class="memo">
         <div class="memo_left line" :style="{'opacity': lineOpacity}"></div>
         <div class="memo_top line" :style="{'opacity': lineOpacity}"></div>
         <div class="memo_right line" :style="{'opacity': lineOpacity}"></div>
@@ -18,7 +18,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </button>
     </h1>
   </div>
 </template>
