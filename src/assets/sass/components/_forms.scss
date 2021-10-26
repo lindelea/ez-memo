@@ -1,0 +1,19 @@
+form {
+  color: $keyColor;
+
+  .form-control {
+    border-radius: 0;
+    border: 1px $keyColor solid;
+    background-color: $background-color;
+    color: $keyColor;
+    &:focus {
+      border: 1px $keyColor solid;
+      color: $keyColor;
+      background-color: $background-color;
+    }
+
+    .form-text {
+      color: $secondaryColor;
+    }
+  }
+}
