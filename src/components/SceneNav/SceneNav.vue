@@ -17,10 +17,20 @@ export default {
       maxScene: 8
     }
   },
+  created() {
+    // setInterval(() => {
+    //   this.scene = this.getRandom(1, 7)
+    // }, 2000)
+  },
   mounted () {
     setTimeout(() => {
       this.scene = this.maxScene - 3
     }, 1000)
+  },
+  methods: {
+    getRandom( min, max ) {
+      return Math.floor( Math.random() * (max + 1 - min) ) + min;
+    }
   }
 }
 </script>

@@ -22,7 +22,7 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'Top',
+        name: 'Elements',
         component: Elements,
       }
     ]
