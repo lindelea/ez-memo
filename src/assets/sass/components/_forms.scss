@@ -16,4 +16,24 @@ form {
       color: $secondaryColor;
     }
   }
+
+  .form-check-input {
+    background-color: $background-color;
+    border: 1px $keyColor solid;
+
+    &[type="checkbox"],  &[type="radio"] {
+      color: $keyColor;
+      border: 1px $keyColor solid;
+      background-color: $background-color;
+      &:checked {
+        color: $keyColor;
+        border: 1px $keyColor solid;
+        background-color: $background-color;
+      }
+    }
+
+    &[type="checkbox"] {
+      border-radius: 0;
+    }
+  }
 }

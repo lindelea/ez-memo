@@ -33,7 +33,7 @@
             <div class="corner right_bottom"></div>
             Success
           </button>
-          <button type="button" class="btn btn-danger m-2">
+          <button type="button" class="btn btn-danger m-2" disabled>
             <div class="corner left_top"></div>
             <div class="corner left_bottom"></div>
             <div class="corner right_top"></div>
@@ -61,6 +61,19 @@
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Default radio
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Default checked radio
+              </label>
             </div>
 
             <button type="submit" class="btn btn-primary">
