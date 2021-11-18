@@ -19,6 +19,12 @@ $buttonMargin: -8px;
 
     &:nth-child(even) {
       transform: scaleY(-1);
+      button {
+        span {
+          display: inline-block;
+          transform: scaleY(-1.4);
+        }
+      }
     }
 
     &:not(:first-child) {
@@ -42,6 +48,12 @@ $buttonMargin: -8px;
       100% 100%,
       0 100%
     );
+
+    span {
+      display: inline-block;
+      transform: scaleY(1.4);
+      color: $mainColor;
+    }
 
     &.o-active {
       width: $buttonActiveSize;
