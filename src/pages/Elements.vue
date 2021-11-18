@@ -11,7 +11,11 @@
         </div>
         <div class="col-6">
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="corner left_top"></div>
+            <div class="corner left_bottom"></div>
+            <div class="corner right_top"></div>
+            <div class="corner right_bottom"></div>
             Launch demo modal
           </button>
 
@@ -21,14 +25,25 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  ...
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, amet cupiditate laboriosam sunt libero aliquam, consequatur alias ducimus adipisci nesciunt odit? Odio tenetur et itaque suscipit atque officiis debitis qui. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, amet cupiditate laboriosam sunt libero aliquam, consequatur alias ducimus adipisci nesciunt odit? Odio tenetur et itaque suscipit atque officiis debitis qui. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, amet cupiditate laboriosam sunt libero aliquam, consequatur alias ducimus adipisci nesciunt odit? Odio tenetur et itaque suscipit atque officiis debitis qui.
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-primary">
+                    <div class="corner left_top"></div>
+                    <div class="corner left_bottom"></div>
+                    <div class="corner right_top"></div>
+                    <div class="corner right_bottom"></div>
+                    Save changes
+                  </button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <div class="corner left_top"></div>
+                    <div class="corner left_bottom"></div>
+                    <div class="corner right_top"></div>
+                    <div class="corner right_bottom"></div>
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
