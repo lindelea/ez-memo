@@ -6,12 +6,54 @@
   </div>
   <logo/>
   <scene-nav>
-    <scene-nav-link name="search">Search</scene-nav-link>
-    <scene-nav-link name="memos">Memos</scene-nav-link>
-    <scene-nav-link name="my_page">My Page</scene-nav-link>
-    <scene-nav-link name="login">Login</scene-nav-link>
-    <scene-nav-link name="register">Register</scene-nav-link>
-    <scene-nav-link name="settings">Settings</scene-nav-link>
+    <scene-nav-link name="search">
+      <template v-slot:text>
+        Search
+      </template>
+      <template v-slot:icon>
+        <icon icon="search"/>
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="memos">
+      <template v-slot:text>
+        Memos
+      </template>
+      <template v-slot:icon>
+        <icon icon="book"/>
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="my_page">
+      <template v-slot:text>
+        My Page
+      </template>
+      <template v-slot:icon>
+        <icon icon="user"/>
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="login">
+      <template v-slot:text>
+        Login
+      </template>
+      <template v-slot:icon>
+        <icon icon="sign-in-alt"/>
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="register">
+      <template v-slot:text>
+        New User
+      </template>
+      <template v-slot:icon>
+        <icon icon="user-plus"/>
+      </template>
+    </scene-nav-link>
+    <scene-nav-link name="settings">
+      <template v-slot:text>
+        Settings
+      </template>
+      <template v-slot:icon>
+        <icon icon="cog"/>
+      </template>
+    </scene-nav-link>
   </scene-nav>
 </template>
 
