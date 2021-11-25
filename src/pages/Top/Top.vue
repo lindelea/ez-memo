@@ -3,8 +3,8 @@
       <div class="glow-bg">
         <div class="glow"></div>
       </div>
-    <logo/>
-    <scene-nav>
+    <logo :class="{'logo_pos': positionChange}" />
+    <scene-nav :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
       <scene-nav-link name="search">
         <template v-slot:text>
           Search
@@ -194,7 +194,21 @@ import SceneNav from "../../components/SceneNav/SceneNav";
 import SceneNavLink from "@/components/SceneNav/SceneNavLink";
 export default {
   name: "Top",
-  components: {SceneNavLink, SceneNav, Logo}
+  components: {SceneNavLink, SceneNav, Logo},
+  data() {
+    return {
+      positionChange: false
+    }
+  },
+  methods: {
+    sceneChanged (newScene) {
+      if (newScene === 'search' || newScene === 'memos') {
+        this.positionChange = true
+      } else {
+        this.positionChange = false
+      }
+    }
+  }
 }
 </script>
 

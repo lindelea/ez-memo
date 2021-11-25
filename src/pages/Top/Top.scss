@@ -25,4 +25,14 @@
       background-image: url('~@/assets/images/glow.png');
     }
   }
+
+  .logo_pos {
+    position: absolute;
+    transform:translate(-48vw,-48vh);
+  }
+
+  .nav_pos {
+    position: absolute;
+    transform:translate(26vw,-48vh);
+  }
 }
