@@ -4,6 +4,14 @@
         <div class="glow"></div>
       </div>
     <logo :class="{'logo_pos': positionChange}" />
+    <div class="search form" :style="{'opacity': positionChange ? 1 : 0}">
+      <div class="row">
+        <div class="col-12">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+
     <scene-nav :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
       <scene-nav-link name="search">
         <template v-slot:text>
