@@ -45,7 +45,7 @@
           <icon icon="user-plus"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="settings">
+      <scene-nav-link name="settings" data-bs-toggle="modal" data-bs-target="#settingsModal">
         <template v-slot:text>
           Settings
         </template>
@@ -89,6 +89,52 @@
               <div class="corner right_top"></div>
               <div class="corner right_bottom"></div>
               Create User
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <div class="corner left_top"></div>
+              <div class="corner left_bottom"></div>
+              <div class="corner right_top"></div>
+              <div class="corner right_bottom"></div>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="newUserModal" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form">
+              <div class="mb-3">
+                <label for="settings-name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="settings-name">
+              </div>
+              <div class="mb-3">
+                <label for="settings-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="settings-password">
+              </div>
+              <div class="mb-3">
+                <label for="settings-new-password" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="settings-new-password">
+              </div>
+              <div class="mb-3">
+                <label for="re-new-password" class="form-label">Re-Password</label>
+                <input type="password" class="form-control" id="re-new-password">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-primary">
+              <div class="corner left_top"></div>
+              <div class="corner left_bottom"></div>
+              <div class="corner right_top"></div>
+              <div class="corner right_bottom"></div>
+              Save
             </button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               <div class="corner left_top"></div>
