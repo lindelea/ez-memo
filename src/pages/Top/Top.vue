@@ -1,8 +1,9 @@
 <template>
   <div class="top">
-      <div class="glow-bg">
-        <div class="glow"></div>
-      </div>
+    <div class="glow-bg">
+      <div class="glow"></div>
+    </div>
+    <loading ref="loading"></loading>
     <logo :class="{'logo_pos': positionChange}" />
     <div class="search form" :style="{'opacity': positionChange ? 1 : 0}">
       <div class="row">
@@ -11,7 +12,6 @@
         </div>
       </div>
     </div>
-
     <scene-nav :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
       <scene-nav-link name="search">
         <template v-slot:text>
@@ -200,13 +200,19 @@
 import Logo from "../../components/Logo/Logo";
 import SceneNav from "../../components/SceneNav/SceneNav";
 import SceneNavLink from "@/components/SceneNav/SceneNavLink";
+import Loading from "@/components/Loading/Loading";
 export default {
   name: "Top",
-  components: {SceneNavLink, SceneNav, Logo},
+  components: {Loading, SceneNavLink, SceneNav, Logo},
   data() {
     return {
       positionChange: false
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.$refs.loading.isShow = false
+    }, 5000)
   },
   methods: {
     sceneChanged (newScene) {
