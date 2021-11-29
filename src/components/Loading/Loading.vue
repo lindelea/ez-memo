@@ -29,7 +29,7 @@ export default {
     }, 500)
     setInterval(() => {
       this.progress += this.progress === 99 ? 0 : 1
-    }, 30)
+    }, 10)
   },
   methods: {
     hide() {

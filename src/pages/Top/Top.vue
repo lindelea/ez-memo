@@ -212,7 +212,7 @@ export default {
   created() {
     setTimeout(() => {
       this.$refs.loading.hide()
-    }, 5000)
+    }, 1500)
   },
   methods: {
     sceneChanged (newScene) {
