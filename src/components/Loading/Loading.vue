@@ -1,5 +1,5 @@
 <template>
-  <div class="loading" :style="{'opacity': (isShow || progress < 99) ? 1 : 0}">
+  <div class="loading" v-if="!isHide" :style="{'opacity': (isShow || progress < 99) ? 1 : 0}">
     <div class="glow-bg">
       <div class="glow"></div>
     </div>
@@ -19,7 +19,8 @@ export default {
     return {
       opacity: 0,
       progress: 0,
-      isShow: true
+      isShow: true,
+      isHide: false
     }
   },
   created() {
@@ -29,6 +30,14 @@ export default {
     setInterval(() => {
       this.progress += this.progress === 99 ? 0 : 1
     }, 30)
+  },
+  methods: {
+    hide() {
+      this.isShow = false;
+      setTimeout(() => {
+        this.isHide = true;
+      }, 300)
+    }
   }
 }
 </script>

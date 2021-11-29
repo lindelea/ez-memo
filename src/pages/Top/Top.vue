@@ -211,7 +211,7 @@ export default {
   },
   created() {
     setTimeout(() => {
-      this.$refs.loading.isShow = false
+      this.$refs.loading.hide()
     }, 5000)
   },
   methods: {
