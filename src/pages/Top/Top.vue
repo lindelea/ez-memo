@@ -213,6 +213,8 @@ export default {
     setTimeout(() => {
       this.$refs.loading.hide()
     }, 1500)
+
+    window.console.log(this.$root.isLogin())
   },
   methods: {
     sceneChanged (newScene) {
