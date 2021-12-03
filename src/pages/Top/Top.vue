@@ -21,7 +21,7 @@
           <icon icon="search"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="memos">
+      <scene-nav-link name="memos" @click="loadData()">
         <template v-slot:text>
           Memos
         </template>
@@ -73,6 +73,34 @@
       </scene-nav-link>
       <scene-nav-link name="test2" v-if="!this.$root.isLogin()"></scene-nav-link>
     </scene-nav>
+    <transition name="fade">
+      <div class="contents" v-if="positionChange">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ memo.attributes.title }}
+                <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
+              </h5>
+              <p class="card-text">{{ memo.attributes.contents }}</p>
+              <a href="#" class="btn btn-primary">
+                <div class="corner left_top"></div>
+                <div class="corner left_bottom"></div>
+                <div class="corner right_top"></div>
+                <div class="corner right_bottom"></div>
+                Detail
+              </a>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
+              <span>{{ memo.attributes.created_at_humans }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </transition>
 
     <!-- New User Modal -->
     <div class="modal fade" id="newUserModal" tabindex="-1" aria-labelledby="newUserModal" aria-hidden="true">
@@ -317,6 +345,35 @@ export default {
         this.positionChange = true
       } else {
         this.positionChange = false
+      }
+    },
+    loadData() {
+      if (this.$root.isLogin()) {
+        axios.get(this.$root.routes.listUserMemo, {
+          headers: {
+            'Authorization': this.$root.tokenType + ' ' + this.$root.token
+          }
+        })
+            .then((response) => {
+              this.$root.memos = response.data.data
+              this.$root.pageLinks = response.data.links
+            })
+            .catch((error) => {
+              window.console.log(error)
+            }).finally(() => {
+
+        })
+      } else {
+        axios.get(this.$root.routes.listMemo)
+            .then((response) => {
+              this.$root.memos = response.data.data
+              this.$root.pageLinks = response.data.links
+            })
+            .catch((error) => {
+              window.console.log(error)
+            }).finally(() => {
+
+        })
       }
     },
     createUser() {
