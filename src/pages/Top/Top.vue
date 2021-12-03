@@ -29,6 +29,7 @@
           <icon icon="book"/>
         </template>
       </scene-nav-link>
+      <scene-nav-link name="test3" v-if="this.$root.isLogin()"></scene-nav-link>
       <scene-nav-link name="my_page" v-if="this.$root.isLogin()">
         <template v-slot:text>
           My Page
@@ -46,14 +47,6 @@
           <icon icon="sign-in-alt"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="logout" data-bs-toggle="modal" data-bs-target="#logout" v-if="this.$root.isLogin()">
-        <template v-slot:text>
-          Logout
-        </template>
-        <template v-slot:icon>
-          <icon icon="sign-out-alt"/>
-        </template>
-      </scene-nav-link>
       <scene-nav-link name="register" data-bs-toggle="modal" data-bs-target="#newUserModal" v-if="!this.$root.isLogin()">
         <template v-slot:text>
           New User
@@ -62,7 +55,6 @@
           <icon icon="user-plus"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="test3" v-if="this.$root.isLogin()"></scene-nav-link>
       <scene-nav-link name="settings" data-bs-toggle="modal" data-bs-target="#settingsModal" v-if="this.$root.isLogin()">
         <template v-slot:text>
           Settings
@@ -72,6 +64,14 @@
         </template>
       </scene-nav-link>
       <scene-nav-link name="test2" v-if="!this.$root.isLogin()"></scene-nav-link>
+      <scene-nav-link name="logout" data-bs-toggle="modal" data-bs-target="#logout" v-if="this.$root.isLogin()">
+        <template v-slot:text>
+          Logout
+        </template>
+        <template v-slot:icon>
+          <icon icon="sign-out-alt"/>
+        </template>
+      </scene-nav-link>
     </scene-nav>
     <transition name="fade">
       <div class="contents" v-if="positionChange">
