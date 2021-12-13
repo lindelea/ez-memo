@@ -36,7 +36,14 @@
           <icon icon="book"/>
         </template>
       </scene-nav-link>
-      <scene-nav-link name="test3" v-if="this.$root.isLogin()"></scene-nav-link>
+      <scene-nav-link name="folders" v-if="this.$root.isLogin()" @click="loadFolders()">
+        <template v-slot:text>
+          Folders
+        </template>
+        <template v-slot:icon>
+          <icon icon="folder"/>
+        </template>
+      </scene-nav-link>
       <scene-nav-link name="my_page" v-if="this.$root.isLogin()">
         <template v-slot:text>
           My Page
@@ -82,31 +89,70 @@
     </scene-nav>
     <transition name="fade">
       <div class="contents" v-if="positionChange">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">
-                {{ memo.attributes.title }}
-                <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
-              </h5>
-              <p class="card-text">{{ memo.attributes.contents }}</p>
-              <a href="#" class="btn btn-primary">
-                <div class="corner left_top"></div>
-                <div class="corner left_bottom"></div>
-                <div class="corner right_top"></div>
-                <div class="corner right_bottom"></div>
-                Detail
-              </a>
+        <div class="row row-cols-1 row-cols-md-3 g-4" v-if="activeScene !== 'folders'">
+          <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ memo.attributes.title }}
+                  <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
+                </h5>
+                <p class="card-text">{{ memo.attributes.contents }}</p>
+                <a href="#" class="btn btn-primary">
+                  <div class="corner left_top"></div>
+                  <div class="corner left_bottom"></div>
+                  <div class="corner right_top"></div>
+                  <div class="corner right_bottom"></div>
+                  Detail
+                </a>
+              </div>
+              <div class="card-footer text-muted d-flex justify-content-between">
+                <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
+                <span>{{ memo.attributes.created_at_humans }}</span>
+              </div>
             </div>
-            <div class="card-footer text-muted d-flex justify-content-between">
-              <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
-              <span>{{ memo.attributes.created_at_humans }}</span>
+          </div>
+        </div>
+        <div class="row" v-else>
+          <div class="col-3">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action"
+                  :class="{'active': this.$root.activeFolder === folder.id}"
+                  v-for="folder in folders"
+                  :key="folder.id"
+                  @click="changeFolder(folder.id)">
+                {{ folder.name }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-9 p-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <div class="col" v-for="memo in this.$root.memos" :key="memo.id">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      {{ memo.attributes.title }}
+                      <span class="badge bg-success" v-if="memo.attributes.is_public">Public</span>
+                    </h5>
+                    <p class="card-text">{{ memo.attributes.contents }}</p>
+                    <a href="#" class="btn btn-primary">
+                      <div class="corner left_top"></div>
+                      <div class="corner left_bottom"></div>
+                      <div class="corner right_top"></div>
+                      <div class="corner right_bottom"></div>
+                      Detail
+                    </a>
+                  </div>
+                  <div class="card-footer text-muted d-flex justify-content-between">
+                    <span>Created by {{ memo.attributes.user_id ? 'aaa' : 'None' }}</span>
+                    <span>{{ memo.attributes.created_at_humans }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </transition>
 
     <!-- New User Modal -->
@@ -329,6 +375,7 @@ export default {
   data() {
     return {
       positionChange: false,
+      activeScene: "register",
       username: null,
       password: null,
       hasErrors: false,
@@ -340,7 +387,8 @@ export default {
       newRePassword: null,
       createUserErrors: {},
       memoTitle: null,
-      memoContents: null
+      memoContents: null,
+      folders: []
     }
   },
   created() {
@@ -350,12 +398,14 @@ export default {
   },
   methods: {
     sceneChanged(newScene) {
+      this.activeScene = newScene
+
       if (newScene === 'memos') {
         this.$root.keyword = null
         this.$root.search();
       }
 
-      if (newScene === 'search' || newScene === 'memos') {
+      if (newScene === 'search' || newScene === 'memos' || newScene === 'folders') {
         this.positionChange = true
       } else {
         this.positionChange = false
@@ -364,9 +414,28 @@ export default {
     loadData() {
       this.$root.search();
     },
+    loadFolders() {
+      axios.get(this.routes.folders, {
+        headers: {
+          'Authorization': this.$root.tokenType + ' ' + this.$root.token
+        }
+      })
+          .then((response) => {
+            this.folders = response.data
+          })
+          .catch((error) => {
+            window.console.log(error)
+          }).finally(() => {
+
+      })
+    },
     search() {
       this.$refs.sceneNav.changeScene('search')
       this.$root.search();
+    },
+    changeFolder(id) {
+      this.$root.activeFolder = id
+      this.$root.search()
     },
     createUser() {
       this.$refs.loading.show()

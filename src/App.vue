@@ -13,6 +13,7 @@ export default {
       tokenType: null,
       token: null,
       keyword: '',
+      activeFolder: null,
       memos: [],
       pageLinks: {
         first: null,
@@ -40,7 +41,8 @@ export default {
       if (this.isLogin()) {
         axios.get(this.routes.listUserMemo, {
           params: {
-            keyword: this.keyword
+            keyword: this.keyword,
+            folder_id: this.activeFolder
           },
           headers: {
             'Authorization': this.tokenType + ' ' + this.token
