@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <scene-nav :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
+    <scene-nav ref="sceneNav" :class="{'nav_pos': positionChange}" v-on:scene-changed="sceneChanged($event)">
       <scene-nav-link name="search">
         <template v-slot:text>
           Search
@@ -350,6 +350,11 @@ export default {
   },
   methods: {
     sceneChanged(newScene) {
+      if (newScene === 'memos') {
+        this.$root.keyword = null
+        this.$root.search();
+      }
+
       if (newScene === 'search' || newScene === 'memos') {
         this.positionChange = true
       } else {
@@ -360,6 +365,7 @@ export default {
       this.$root.search();
     },
     search() {
+      this.$refs.sceneNav.changeScene('search')
       this.$root.search();
     },
     createUser() {
