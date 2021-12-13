@@ -8,7 +8,14 @@
     <div class="search form" :style="{'opacity': positionChange ? 1 : 0}">
       <div class="row">
         <div class="col-12">
-          <input type="text" placeholder="Enter keyword to search" class="form-control">
+          <input type="text"
+                 placeholder="Enter keyword to search"
+                 class="form-control"
+                 v-model="this.$root.keyword"
+                 @change="search()"
+                 @keyup.enter="search()"
+                 @input="search()"
+          >
         </div>
       </div>
     </div>
@@ -280,16 +287,16 @@
             <div class="form">
               <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title">
+                <input type="text" class="form-control" id="title" v-model="memoTitle">
               </div>
               <div class="mb-3">
                 <label for="contents" class="form-label">Contents</label>
-                <textarea class="form-control" id="contents" rows="3"></textarea>
+                <textarea class="form-control" id="contents" rows="3" v-model="memoContents"></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-primary" @click="createUser()">
+            <button type="button" class="btn btn-primary" @click="createMemo()">
               <div class="corner left_top"></div>
               <div class="corner left_bottom"></div>
               <div class="corner right_top"></div>
@@ -331,7 +338,9 @@ export default {
       email: null,
       newPassword: null,
       newRePassword: null,
-      createUserErrors: {}
+      createUserErrors: {},
+      memoTitle: null,
+      memoContents: null
     }
   },
   created() {
@@ -348,33 +357,10 @@ export default {
       }
     },
     loadData() {
-      if (this.$root.isLogin()) {
-        axios.get(this.$root.routes.listUserMemo, {
-          headers: {
-            'Authorization': this.$root.tokenType + ' ' + this.$root.token
-          }
-        })
-            .then((response) => {
-              this.$root.memos = response.data.data
-              this.$root.pageLinks = response.data.links
-            })
-            .catch((error) => {
-              window.console.log(error)
-            }).finally(() => {
-
-        })
-      } else {
-        axios.get(this.$root.routes.listMemo)
-            .then((response) => {
-              this.$root.memos = response.data.data
-              this.$root.pageLinks = response.data.links
-            })
-            .catch((error) => {
-              window.console.log(error)
-            }).finally(() => {
-
-        })
-      }
+      this.$root.search();
+    },
+    search() {
+      this.$root.search();
     },
     createUser() {
       this.$refs.loading.show()
@@ -436,6 +422,43 @@ export default {
       let logoutModal = Modal.getOrCreateInstance(document.querySelector('#logout'))
       logoutModal.hide()
       window.location.read
+    },
+    createMemo() {
+      if (this.$root.isLogin()) {
+        axios.post(this.$root.routes.createUserMemo, {
+          title: this.memoTitle,
+          contents: this.memoContents
+        }, {
+          headers: {
+            'Authorization': this.$root.tokenType + ' ' + this.$root.token
+          }
+        })
+            .then((response) => {
+              this.$root.search()
+              let createMemoModal = Modal.getOrCreateInstance(document.querySelector('#createMemo'))
+              createMemoModal.hide()
+              this.memoTitle = null
+              this.memoContents = null
+            })
+            .catch((error) => {
+
+            })
+      } else {
+        axios.post(this.$root.routes.createMemo, {
+          title: this.memoTitle,
+          contents: this.memoContents
+        })
+            .then((response) => {
+              this.$root.search()
+              let createMemoModal = Modal.getOrCreateInstance(document.querySelector('#createMemo'))
+              createMemoModal.hide()
+              this.memoTitle = null
+              this.memoContents = null
+            })
+            .catch((error) => {
+
+            })
+      }
     }
   }
 }
